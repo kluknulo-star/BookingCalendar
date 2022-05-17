@@ -2,18 +2,94 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <title>{% block title %}Mining calendar{% endblock %}</title>
+        <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/9/93/National_Mineral_Resources_University_CoA.png" >
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+{#        Bulma css#}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link href="~bulma-calendar/dist/css/bulma-calendar.min.css" rel="stylesheet">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+{#        Caledar css#}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"
+              integrity="sha256-zsz1FbyNCtIE2gIB+IyWV7GbCLyKJDTBRz0qQaBSLxM=" crossorigin="anonymous">
+        {% block stylesheets %}
+
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-image" href="http://en.spmi.ru" >
+{#                <img src="https://spmi.ru/themes/spminewtplv7/logo.svg" width="50" height="28">#}
+                <img src="https://www.spmi.ru/themes/spminewtplv7/logo_m.svg">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+{#                <a href="">back to list</a>#}
+                <a class="navbar-item" href="{{ path('main_page') }}">
+                    Календарь
+                </a>
+
+                <a class="navbar-item" href="{{ path('booking_new') }}">
+                    Создать запись
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="{{ path('booking_index') }}">
+                        Записи
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Просмотреть
+                        </a>
+                        <a class="navbar-item" >
+                            Редактировать
+                        </a>
+                        <a class="navbar-item" >
+                            Удалить
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Что-то еще
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+{#            href="{{ path('booking_show') }}"#}
+{#            href="{{ path('booking_edit') }}"#}
+{#            href="{{ path('booking_delete') }}"#}
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-link is-info is-outlined">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+{#    Calendar .js#}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"
+            integrity="sha256-XOMgUu4lWKSn8CFoJoBoGd9Q/OET+xrfGYSo+AKpFhE=" crossorigin="anonymous"></script>
+    {% block javascripts %}{% endblock %}
+    {% block body %}{% endblock %}
     </body>
 </html>

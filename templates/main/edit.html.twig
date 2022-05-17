@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Booking{% endblock %}
+
+{% block body %}
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow is-size-2">
+            Редактирование заявки
+        </div>
+    </div>
+
+    {{ include('main/_form.html.twig', {'button_label': 'Обновить'}) }}
+
+
+    {{ include('main/_delete_form.html.twig') }}
+
+{#    <a href="{{ path('main_page') }}">back to list</a>#}
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking index{% endblock %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow is-size-2">
+            Текущие заявки
+        </div>
+    </div>
+
+    <table class="table is-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Начало</th>
+            <th>Конец</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>ID помещения</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.title }}</td>
+                <td>{{ booking.description }}</td>
+                <td>{{ booking.dateStart ? booking.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.dateEnd ? booking.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.fio }}</td>
+                <td>{{ booking.tel }}</td>
+                <td>{{ booking.idRoom }}</td>
+
+{#                <td>{{ booking.approved }}</td>#}
+
+                <td>
+
+                    <a href="{{ path('booking_show', {'id': booking.id}) }}" class="button is-small is-info is-outlined">
+                        show
+                    </a>
+                    <a href="{{ path('booking_edit', {'id': booking.id}) }}" class="button is-small is-danger is-outlined">
+                        edit
+                    </a>
+{#                    <button class="" action="">#}
+{#                        show#}
+{#                    </button>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{#    <button class="button">#}
+{#        <a href="{{ path('booking_new') }}">#}
+{#            Create new#}
+{#        </a>#}
+{#    </button>#}
+{#    <button class="button">#}
+{#        <a href="{{ path('main_page') }}">#}
+{#            Calendar#}
+{#        </a>#}
+{#    </button>#}
+{% endblock %}

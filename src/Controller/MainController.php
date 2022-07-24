@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Booking;
+//use App\Entity\Booking;
 use App\Entity\BookingRequest;
 use App\Form\BookingType;
-use App\Repository\BookingRepository;
+//use App\Repository\BookingRepository;
 use App\Repository\BookingRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main_page")
+     * @Route("/", name="homepage")
      */
     public function index(BookingRequestRepository $calendar): Response
     {
@@ -46,30 +46,10 @@ class MainController extends AbstractController
             'bookings' => $bookingRepository->findAll(),
         ]);
     }
-    /**
-     * @Route("/new", name="booking_new")
-     */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $booking = new BookingRequest();
-        $form = $this->createForm(BookingType::class, $booking);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($booking);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('main_page', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('main/new.html.twig', [
-            'booking' => $booking,
-            'form' => $form,
-        ]);
-    }
 
     /**
-     * @Route("/{id}", name="booking_show", methods={"GET"})
+     * @Route("/show", name="booking_show", methods={"GET"})
      */
     public function show(BookingRequest $booking): Response
     {
@@ -78,8 +58,9 @@ class MainController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}/edit", name="booking_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="booking_edit", methods={"GET"})
      */
     public function edit(Request $request, BookingRequest $booking, EntityManagerInterface $entityManager): Response
     {
@@ -100,7 +81,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="booking_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="booking_delete", methods={"GET"})
      */
     public function delete(Request $request, BookingRequest $booking, EntityManagerInterface $entityManager): Response
     {
@@ -109,6 +90,6 @@ class MainController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('main_page', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
     }
 }

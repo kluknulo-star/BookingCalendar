@@ -1,3 +1,18 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+show_list:
+  path:       /{id}
+  controller: App\Controller\MainController::show
+  requirements:
+    id: '(\d+)'
+
+edit_list:
+  path:       /{id}/edit
+  controller: App\Controller\MainController::edit
+  requirements:
+    id: '(\d+)'
+
+delete_list:
+  path:       /{id}/delete
+  controller: App\Controller\MainController::delete
+  requirements:
+    id: '(\d+)'
+

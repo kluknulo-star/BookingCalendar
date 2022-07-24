@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{#    <a href="{{ path('booking_new') }}">Create new main</a>#}
+{#    <a href="{{ path('booking_index') }}">LIST</a>#}
+    {#    {{ dump(data) }}#}
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow is-size-3 has-text-info-dark">
+            Календарь
+        </div>
+    </div>
+    <div id="calendar-holder"></div>
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+    <link href='templates/fullcalendar/lib/main.min.css' rel='stylesheet' />
+    <script src='fullcalendar/main.js'></script>
+    <style>
+        #calendar-holder{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}
+    <a class="navbar-item">
+                <div class="column is-narrow is-size-6 has-text-grey-dark"  action="{{ path('homepage') }}">
+                    Сайт бронирования мероприятий в горном
+                </div>
+                <div class="column is-narrow is-size-6 has-text-grey-dark">
+
+                </div>
+    </a>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                firstDay: 1,
+                locale: "ru",
+                timeZone: "Europe/Moscow",
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek',
+                },
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                {#events: {{ data|raw }},#}
+                editable: true,
+                eventResizableFromStart: true,
+                // displayEventTime: true,
+                displayEventEnd: true,
+                dateClick: function($date) {
+                    alert("date a day has been clicked!");
+                },
+                events: {{ data|raw }},
+
+                // color: 'random'
+            });
+
+            calendar.on('eventChange', (e)=>{
+                console.error(e)
+            })
+
+            calendar.render();
+
+        });
+    </script>
+
+{% endblock %}

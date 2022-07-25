@@ -33,14 +33,20 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-end">
-            {#                <a href="">back to list</a>#}
+
             <a class="navbar-item" href="{{ path('homepage_admin') }}">
                 Календарь
             </a>
 
-            <a class="navbar-item" href="{{ path('booking_index') }}">
+
+            <a class="navbar-item" href="{{ path('booking_new') }}">
+                Создать запись
+            </a>
+
+            <a class="navbar-item" href="{{ path('booking_index_admin') }}">
                 Записи
             </a>
+
 
         </div>
 
@@ -48,10 +54,6 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-
-                    <a class="button is-dark" href="{{ path('app_login') }}">
-                        Log in
-                    </a>
                     <a class="button is-light" href="{{ path('app_logout') }}">
                         Log out
                     </a>

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.base.html.twig' %}
 
 {% block title %}Edit Booking{% endblock %}
 
@@ -9,10 +9,10 @@
         </div>
     </div>
 
-    {{ include('main/_form.html.twig', {'button_label': 'Обновить'}) }}
+    {{ include('admin/_form.html.twig', {'button_label': 'Обновить'}) }}
 
 
-    {{ include('main/_delete_form.html.twig') }}
+    {{ include('admin/_delete_form.html.twig') }}
 
 {#    <a href="{{ path('main_page') }}">back to list</a>#}
 

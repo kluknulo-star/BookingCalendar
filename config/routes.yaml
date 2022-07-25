@@ -1,18 +1,19 @@
-show_list:
+booking_show:
   path:       /{id}
   controller: App\Controller\MainController::show
+  methods: GET
   requirements:
     id: '(\d+)'
 
 edit_list:
   path:       /{id}/edit
-  controller: App\Controller\MainController::edit
+  controller: App\Controller\AdminController::edit
   requirements:
     id: '(\d+)'
 
 delete_list:
   path:       /{id}/delete
-  controller: App\Controller\MainController::delete
+  controller: App\Controller\AdminController::delete
   requirements:
     id: '(\d+)'
 

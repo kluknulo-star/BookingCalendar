@@ -37,6 +37,7 @@ class MainController extends AbstractController
         $data = json_encode($rdvs);
         return $this->render('main/index.html.twig', compact('data'));
     }
+
     /**
      * @Route("/list", name="booking_index", methods={"GET"})
      */
@@ -49,7 +50,7 @@ class MainController extends AbstractController
 
 
     /**
-     * @Route("/show", name="booking_show", methods={"GET"})
+     * @Route("/{id}", name="booking_show", methods={"GET"})
      */
     public function show(BookingRequest $booking): Response
     {
@@ -58,27 +59,6 @@ class MainController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/{id}/edit", name="booking_edit", methods={"GET"})
-     */
-    public function edit(Request $request, BookingRequest $booking, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(BookingType::class, $booking);
-        $booking->setDateUpdate( new \DateTimeImmutable());
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('booking_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('main/edit.html.twig', [
-            'booking' => $booking,
-            'form' => $form,
-        ]);
-    }
 
     /**
      * @Route("/{id}/delete", name="booking_delete", methods={"GET"})

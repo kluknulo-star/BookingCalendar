@@ -12,7 +12,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     {
         // ...
         $content = "You have no rules";
-        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
+//        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
         return new Response($content, 403);
     }
 }

@@ -4,6 +4,7 @@ Mining Calendar service for booking rooms for various events at the Mining Unive
 ## How to install
 
 composer install
+
 npm install
 
 ## Screenshots

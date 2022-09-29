@@ -1,3 +1,4 @@
+*Приложение разрабатывается в рамках студенческого проекта и не имеет отношения к организации!!!*
 # MiningCalendar
 Mining Calendar service for booking rooms for various events at the Mining University
 

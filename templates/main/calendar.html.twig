@@ -1,0 +1,144 @@
+{# date calendar #}
+    {% set date = (app.request.get('date') ?
+        '15-'~app.request.get('date') : 'now')|date("U") %}
+    {# date event #}
+    {% set dateRecord = app.request.get('date') ?
+        app.request.get('date') : 'now'|date("m-Y") %}
+
+    {# current date #}
+    {% set currentDay = 'now'|date("d") %}
+    {% set currentMonth = 'now'|date('m') %}
+    {% set currentYear = 'now'|date('Y') %}
+
+    {# date #}
+    {% set dateMonth = date|date('m') %}
+    {% set dateYear = date|date('Y') %}
+
+    {% set daysInMonth = date|date('t') %}
+    {% set startDow = date|date('F 1\\s\\t Y')|date('N') - 1 %}
+    {% set dow = startDow %}
+
+
+    {% set month =
+        ['','Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'] %}
+
+<div class="calendar is-calendar-large">
+    <div class="calendar-nav">
+        <div class="calendar-nav-left">
+
+            <a class="btn is-blue"
+               href="#">
+                <i class="fa fa-chevron-left"></i>
+            </a>
+
+        </div>
+        <div>{{ month[date|date("n")] }} {{ date|date('Y') }}</div>
+        <div class="calendar-nav-right">
+
+            <a class="btn is-blue " href="#">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+
+        </div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div class="calendar-date">Пн</div>
+            <div class="calendar-date">Вт</div>
+            <div class="calendar-date">Ср</div>
+            <div class="calendar-date">Чт</div>
+            <div class="calendar-date">Пт</div>
+            <div class="calendar-date">Сб</div>
+            <div class="calendar-date">Вс</div>
+        </div>
+        <div class="calendar-body">
+            {% for day in range(1, daysInMonth) %}
+                {% if loop.first and startDow != 0 %}
+                    {% for days in 1..startDow %}
+                        <div class="calendar-date"></div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="calendar-date"
+                     data-date="{{ day~'-'~ dateMonth ~'-'~ dateYear }}"
+                     data-student="{{ app.request.get('id_student') }}">
+
+                    <div class="columns is-gapless is-justify-content-flex-end">
+                        <div class="column is-narrow">
+                            <div class="js-modal-trigger"
+                                 data-target="modal-student-attendance"
+                                 aria-haspopup="true">
+
+                                     <span class="icon calendar-icon">
+                                         <i class="fas fa-light fa-graduation-cap"></i>
+                                     </span>
+                            </div>
+                        </div>
+                        <div class="column is-narrow">
+                            <div class="js-modal-trigger"
+
+                                 data-target="modal-student-performance"
+                                 aria-haspopup="true">
+
+                                     <span class="icon calendar-icon">
+                                         <i class="fas fa-regular fa-chart-line"></i>
+                                     </span>
+                            </div>
+                        </div>
+                        <div class="column is-narrow">
+                            <button class="date-item {{ currentDay
+                            == day and currentMonth == dateMonth and currentYear == dateYear ?
+                            'is-today' : '' }}">{{ day }}</button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-events">
+
+                        {#                            {% for student_attendance in#}
+                        {#                                app_students_attendance %}#}
+
+                        {#                                #}{# first compare for start event #}
+                        {#                                #}{# second compare for middle event #}
+                        {#                                #}{# third compare for end event #}
+                        {#                                {% if student_attendance.date|date("d")#}
+                        {#                                    == day and student_attendance.date|date("m") == dateMonth and#}
+                        {#                                    student_attendance.date|date("Y") == dateYear %}#}
+
+                        {#                                    <div class="tags has-addons student-attendance">#}
+                        {#                                         <span class="tag"#}
+                        {#                                               style="background-color:#}
+                        {#                                               {{ student_attendance.idTrainingSubject.idTrainingSubjectColor.color }};">{{ student_attendance.idTrainingSubject.title }}</span>#}
+                        {#                                        <span class="tag {{ student_attendance.attendance ? 'is-primary' : 'is-danger' }}">{{ student_attendance.attendance ? '+' : '-' }}</span>#}
+                        {#                                        <a class="tag delete-student-attendance"#}
+
+                        {#                                           data-id-student-attendance="{{ student_attendance.id }}">#}
+                        {#                                                 <span class="icon is-small">#}
+                        {#                                                     <i class="fas fa-times"></i>#}
+                        {#                                                 </span>#}
+                        {#                                        </a>#}
+                        {#                                    </div>#}
+
+                        {#                                {% endif %}#}
+
+                        {#                            {% endfor %}#}
+
+                    </div>
+                </div>
+
+                {% if loop.last and dow != 6 %}
+                    {% for days in dow..5 %}
+                        <div class="calendar-date"></div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if dow == 6 %}
+                    {% set dow = 0 %}
+                {% else %}
+                    {% set dow = dow + 1 %}
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

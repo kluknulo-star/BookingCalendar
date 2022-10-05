@@ -2,71 +2,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Mining calendar{% endblock %}</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/9/93/National_Mineral_Resources_University_CoA.png" >
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {#        Bulma css#}
+    <title>{% block title %}Booking Calendar{% endblock %}</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link href="~bulma-calendar/dist/css/bulma-calendar.min.css" rel="stylesheet">
 
-    {#        Caledar css#}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"
-          integrity="sha256-zsz1FbyNCtIE2gIB+IyWV7GbCLyKJDTBRz0qQaBSLxM=" crossorigin="anonymous">
+
     {% block stylesheets %}
 
     {% endblock %}
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-image" href="http://en.spmi.ru" >
-            {#                <img src="https://spmi.ru/themes/spminewtplv7/logo.svg" width="50" height="28">#}
-            <img src="https://www.spmi.ru/themes/spminewtplv7/logo_m.svg">
-        </a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
+{% include 'utils/sidebar.html.twig' %}
+<div class="container">
+    <br>
+    <div style="margin-left:5%">
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-end">
-            {#                <a href="">back to list</a>#}
-            <a class="navbar-item" href="{{ path('homepage_admin') }}">
-                Календарь
-            </a>
-
-            <a class="navbar-item" href="{{ path('booking_index') }}">
-                Записи
-            </a>
-
-        </div>
-
-
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-
-                    <a class="button is-dark" href="{{ path('app_login') }}">
-                        Log in
-                    </a>
-                    <a class="button is-light" href="{{ path('app_logout') }}">
-                        Log out
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-
-
-
-{#    Calendar .js#}
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"
-        integrity="sha256-XOMgUu4lWKSn8CFoJoBoGd9Q/OET+xrfGYSo+AKpFhE=" crossorigin="anonymous"></script>
-{% block javascripts %}{% endblock %}
-{% block body %}{% endblock %}
+</div>
 </body>
+
 </html>

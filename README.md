@@ -1,4 +1,3 @@
-*Приложение разрабатывается в рамках студенческого проекта и не имеет отношения к организации!!!*
 # Booking Calendar
 Booking Calendar service for booking rooms for various events at the company
 

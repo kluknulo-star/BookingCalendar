@@ -13,26 +13,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class CalendarController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="calendar_index")
      */
-    public function index(BookingRequestRepository $calendar): Response
+    public function calendar(BookingRequestRepository $calendar): Response
     {
         $events = $calendar->findAll();
-//        dd($events);
 
         $rdvs=[];
-        foreach($events as $event){
-            $rdvs[] = [
-                'id' => $event->getId(),
-                'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
-                'title' => $event->getTitle(),
-                'color'=> sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)),
-            ];
-        }
+//        foreach($events as $event){
+//            $rdvs[] = [
+//                'id' => $event->getId(),
+//                'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
+//                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
+//                'title' => $event->getTitle(),
+//                'color'=> sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)),
+//            ];
+//        }
 
         $data = json_encode($rdvs);
         return $this->render('main/index.html.twig', compact('data'));
@@ -70,6 +69,6 @@ class MainController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('calendar_index', [], Response::HTTP_SEE_OTHER);
     }
 }

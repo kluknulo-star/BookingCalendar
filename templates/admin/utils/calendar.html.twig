@@ -26,16 +26,17 @@
     <div class="calendar-nav">
         <div class="calendar-nav-left">
 
-            <a class="btn is-blue"
+            <a class="btn"
                href="#">
-                <i class="fa fa-chevron-left"></i>
+
+                <i class="fa fa-chevron-left is-primary"></i>
             </a>
 
         </div>
         <div>{{ month[date|date("n")] }} {{ date|date('Y') }}</div>
         <div class="calendar-nav-right">
 
-            <a class="btn is-blue " href="#">
+            <a class="btn is-dark" href="#">
                 <i class="fa fa-chevron-right"></i>
             </a>
 
@@ -69,9 +70,9 @@
                                  data-target="modal-student-attendance"
                                  aria-haspopup="true">
 
-                                     <span class="icon calendar-icon">
-                                         <i class="fas fa-light fa-graduation-cap"></i>
-                                     </span>
+{#                                     <span class="icon calendar-icon">#}
+{#                                         <i class="fas fa-light fa-graduation-cap"></i>#}
+{#                                     </span>#}
                             </div>
                         </div>
                         <div class="column is-narrow">
@@ -80,9 +81,9 @@
                                  data-target="modal-student-performance"
                                  aria-haspopup="true">
 
-                                     <span class="icon calendar-icon">
-                                         <i class="fas fa-regular fa-chart-line"></i>
-                                     </span>
+{#                                     <span class="icon calendar-icon">#}
+{#                                         <i class="fas fa-regular fa-chart-line"></i>#}
+{#                                     </span>#}
                             </div>
                         </div>
                         <div class="column is-narrow">

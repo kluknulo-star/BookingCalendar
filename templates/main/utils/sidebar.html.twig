@@ -1,9 +1,8 @@
 <link href="{{ asset('styles/css/sidebar.css') }}" rel="stylesheet"/>
 <nav class="main-menu">
-    <br>
     <ul>
         <li>
-            <a href="{{ path('calendar_index') }}">
+            <a href="{{ path('homepage_admin') }}">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
                             Календарь
@@ -11,15 +10,23 @@
             </a>
 
         </li>
+        <li class="has-subnav">
+            <a href="#">
+                <i class="fa fa-laptop fa-2x"></i>
+                <span class="nav-text">
+                            Заявки
+                        </span>
+            </a>
 
+        </li>
     </ul>
 
     <ul class="logout">
         <li>
-            <a href="{{ path('app_login') }}">
+            <a href="#">
                 <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
-                            Войти
+                            Выйти
                         </span>
             </a>
         </li>

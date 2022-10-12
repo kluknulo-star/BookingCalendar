@@ -6,14 +6,18 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'admin/utils/sidebar.html.twig' %}
+    {% include 'manager/utils/sidebar.html.twig' %}
     <br>
     <h4 class="has-text-centered has-text-info title is-4">
-        Календарь
+        Календарь (manager)
     </h4>
-    {% include 'admin/utils/calendar.html.twig' %}
+
+    {% include 'manager/utils/calendar.html.twig' %}
 
 {% endblock %}
+
+
+
 
 {% block javascripts %}
 

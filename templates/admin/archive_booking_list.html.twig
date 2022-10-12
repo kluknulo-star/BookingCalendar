@@ -30,7 +30,7 @@
             <th class="has-text-white">ФИО</th>
             <th class="has-text-white">Телефон</th>
             <th class="has-text-white">Помещение</th>
-            <th class="has-text-white">Действие</th>
+            <th class="has-text-white">Решение</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +44,7 @@
                 <td>{{ booking.fio }}</td>
                 <td>{{ booking.tel }}</td>
                 <td>{{ booking.idRoom }}</td>
+                <td>{{ booking.isApproved ? 'одобрено' : 'отклонено'}}</td>
 
 {#                <td>{{ booking.approved }}</td>#}
 
@@ -58,11 +59,11 @@
 {#                        show#}
 {#                    </button>#}
 {#                </td>#}
-                <td>
-                    <a href="{{ path('booking_show_admin', {'id': booking.id}) }}" class="button is-small is-dark is-outlined">
-                        Рассмотреть
-                    </a>
-                </td>
+{#                <td>#}
+{#                    <a href="{{ path('booking_show_admin', {'id': booking.id}) }}" class="button is-small is-dark is-outlined">#}
+{#                        Рассмотреть#}
+{#                    </a>#}
+{#                </td>#}
             </tr>
         {% else %}
             <tr>

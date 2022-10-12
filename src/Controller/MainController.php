@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CalendarController extends AbstractController
+class MainController extends AbstractController
 {
     /**
      * @Route("/", name="calendar_index")
@@ -32,6 +32,18 @@ class CalendarController extends AbstractController
 //                'color'=> sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)),
 //            ];
 //        }
+        if ($this->getUser()) {
+            $userRole = $this->getUser()->getRoles();
+//            dd($this->getUser());
+            if (in_array("ROLE_ADMIN", $userRole))
+            {
+                return $this->redirectToRoute('calendar_admin');
+            }
+            elseif (in_array("ROLE_USER", $userRole))
+            {
+                return $this->redirectToRoute('calendar_manager');
+            }
+        }
 
         $data = json_encode($rdvs);
         return $this->render('main/index.html.twig', compact('data'));

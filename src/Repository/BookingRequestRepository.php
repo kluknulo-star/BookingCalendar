@@ -19,4 +19,29 @@ class BookingRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, BookingRequest::class);
     }
 
+    public function findAllUnseen() : array
+    {
+
+        $queryBuilder = $this->createQueryBuilder('booking')
+            ->where('booking.approved is NULL')
+            ->orderBy('booking.id');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->execute();
+    }
+
+    public function findAllSeen() : array
+    {
+
+        $queryBuilder = $this->createQueryBuilder('booking')
+            ->where('booking.approved is NOT NULL')
+            ->orderBy('booking.id');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->execute();
+    }
+
+
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="homepage_admin")
+     * @Route("/admin", name="calendar_admin")
      */
     public function index(BookingRequestRepository $calendar): Response
     {
@@ -59,13 +59,34 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="booking_show", methods={"GET"})
+     * @Route("/show/{id}", name="booking_show_admin", methods={"GET"})
      */
     public function show(BookingRequest $booking): Response
     {
         return $this->render('admin/show.html.twig', [
             'booking' => $booking,
         ]);
+    }
+
+    /**
+     * @Route("/approve/{id}", name="booking_approve_admin", methods={"GET"})
+     */
+    public function approve(BookingRequest $booking): Response
+    {
+
+        $booking->setIsApproved(TRUE);
+        dd($booking);
+        return $this->redirectToRoute('booking_list_admin');
+    }
+
+    /**
+     * @Route("/decline/{id}", name="booking_decline_admin", methods={"GET"})
+     */
+    public function decline(BookingRequest $booking): Response
+    {
+        $booking->setIsApproved(false);
+
+        return $this->redirectToRoute('booking_list_admin');
     }
 
 
@@ -91,12 +112,22 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/list_admin", name="booking_index_admin", methods={"GET"})
+     * @Route("/admin/list", name="booking_list_admin", methods={"GET"})
      */
     public function list(BookingRequestRepository $bookingRepository): Response
     {
         return $this->render('admin/booking_list.html.twig', [
-            'bookings' => $bookingRepository->findAll(),
+            'bookings' => $bookingRepository->findAllUnseen(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/list/archive", name="booking_list_archive_admin", methods={"GET"})
+     */
+    public function listArchive(BookingRequestRepository $bookingRepository): Response
+    {
+        return $this->render('admin/archive_booking_list.html.twig', [
+            'bookings' => $bookingRepository->findAllSeen(),
         ]);
     }
 
@@ -111,6 +142,6 @@ class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('homepage_admin', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('calendar_admin', [], Response::HTTP_SEE_OTHER);
     }
 }

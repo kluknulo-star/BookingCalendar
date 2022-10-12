@@ -82,6 +82,10 @@ class BookingRequest
      */
     private $id_user_update;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_approved;
 
 
     public function __construct()
@@ -250,6 +254,17 @@ class BookingRequest
     {
         $this->id_user_update = $id_user_update;
 
+        return $this;
+    }
+
+    public function isIsApproved(): ?bool
+    {
+        return $this->is_approved;
+    }
+
+    public function setIsApproved(?bool $is_approved): self
+    {
+        $this->is_approved = $is_approved;
         return $this;
     }
 }

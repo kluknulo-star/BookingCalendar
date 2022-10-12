@@ -5,9 +5,9 @@ booking_show:
   requirements:
     id: '(\d+)'
 
-edit_list:
-  path:       /{id}/edit
-  controller: App\Controller\AdminController::edit
+show_list:
+  path:       show/{id}/
+  controller: App\Controller\AdminController::show
   requirements:
     id: '(\d+)'
 

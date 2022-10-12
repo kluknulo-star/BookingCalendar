@@ -1,21 +1,43 @@
 <link href="{{ asset('styles/css/sidebar.css') }}" rel="stylesheet"/>
 <nav class="main-menu">
+
     ADMIN
     <ul>
         <li>
-            <a href="{{ path('homepage_admin') }}">
-                <i class="fa fa-home fa-2x"></i>
+            <a href="{{ path('calendar_admin') }}">
+                <i class="fa fa-calendar fa-2x"></i>
                 <span class="nav-text">
                             Календарь
                         </span>
             </a>
 
         </li>
-        <li class="has-subnav">
-            <a href="#">
-                <i class="fa fa-laptop fa-2x"></i>
+        <br>
+        <li>
+            <a href="{{ path('booking_list_admin') }}">
+                <i class="fa fa-tasks"></i>
                 <span class="nav-text">
-                            Заявки
+                    Управление заявками
+                        </span>
+            </a>
+
+        </li>
+        <br>
+        <li>
+            <a href="#">
+                <i class="fa fa-pencil"></i>
+                <span class="nav-text">
+                    Создать заявку
+                        </span>
+            </a>
+
+        </li>
+        <br>
+        <li>
+            <a href="{{ path('booking_list_archive_admin') }}">
+                <i class="fa fa-archive"></i>
+                <span class="nav-text">
+                    Архив заявок
                         </span>
             </a>
 
@@ -24,7 +46,7 @@
 
     <ul class="logout">
         <li>
-            <a href="#">
+            <a href="{{ path('app_logout') }}">
                 <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
                             Выйти

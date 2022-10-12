@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ManagerController extends AbstractController
 {
     /**
-     * @Route("/admin", name="homepage_admin")
+     * @Route("/manager", name="calendar_manager")
      */
     public function index(BookingRequestRepository $calendar): Response
     {
@@ -33,7 +33,7 @@ class ManagerController extends AbstractController
         }
 
         $data = json_encode($rdvs);
-        return $this->render('admin/index.html.twig', compact('data'));
+        return $this->render('manager/index.html.twig', compact('data'));
     }
 
     /**
@@ -91,7 +91,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("/list_admin", name="booking_index_admin", methods={"GET"})
+     * @Route("/manager/list", name="booking_index_admin", methods={"GET"})
      */
     public function list(BookingRequestRepository $bookingRepository): Response
     {
@@ -111,6 +111,6 @@ class ManagerController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('homepage_admin', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('calendar_admin', [], Response::HTTP_SEE_OTHER);
     }
 }

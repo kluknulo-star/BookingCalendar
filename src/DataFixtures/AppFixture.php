@@ -13,20 +13,23 @@ class AppFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-        for ($i = 0; $i < 10; $i++)
+        for ($i = 0; $i < 1; $i++)
         {
             $booking = new BookingRequest();
-            $booking->setTitle($faker->title);
+            $booking->setTitle($faker->sentence());
             $booking->setDescription($faker->realText());
-            $dayStart = $faker->dateTime();
-            $booking->setDateStart($dayStart);
-            $booking->setDateEnd($dayStart+86400);
-            $booking->setFio($faker->name);
-            $booking->setTel($faker->e164PhoneNumber);
+            $booking->setDateStart($faker->dateTimeBetween($startDate = '-1 day', $endDate = 'now', $timezone = null));
+            $booking->setDateFinish($faker->dateTimeBetween($startDate = 'now', $endDate = '+1 day', $timezone = null));
+            $booking->setFullName($faker->name);
+            $booking->setPhone($faker->e164PhoneNumber);
+            $booking->setIdRoom(rand(1,3));
+            $booking->setIdUserCreate(0);
 
-
-            dd($booking);
+            $manager->persist($booking);
+//            dump($booking);
         }
+
+        $manager->flush();
 
     }
 }

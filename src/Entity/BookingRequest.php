@@ -35,22 +35,18 @@ class BookingRequest
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_end;
+    private $date_finish;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $fio;
+    private $full_name;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
      */
-    private $tel;
+    private $phone;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true, nullable=true)
-     */
-    private $approved;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -91,9 +87,8 @@ class BookingRequest
     public function __construct()
     {
         $this -> date_create = new \DateTimeImmutable();
-        $this -> id_user_create = 1;
+//        $this -> id_user_create = 1;
         $this -> active = true;
-        $this -> approved = false;
     }
 
     public function getId(): ?int
@@ -137,50 +132,38 @@ class BookingRequest
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeInterface
+    public function getDateFinish(): ?\DateTimeInterface
     {
-        return $this->date_end;
+        return $this->date_finish;
     }
 
-    public function setDateEnd(\DateTimeInterface $date_end): self
+    public function setDateFinish(\DateTimeInterface $date_finish): self
     {
-        $this->date_end = $date_end;
+        $this->date_finish = $date_finish;
 
         return $this;
     }
 
-    public function getFio(): ?string
+    public function getFullName(): ?string
     {
-        return $this->fio;
+        return $this->full_name;
     }
 
-    public function setFio(string $fio): self
+    public function setFullName(string $full_name): self
     {
-        $this->fio = $fio;
+        $this->full_name = $full_name;
 
         return $this;
     }
 
-    public function getTel(): ?string
+    public function getPhone(): ?string
     {
-        return $this->tel;
+        return $this->phone;
     }
 
-    public function setTel(string $tel): self
+    public function setPhone(string $phone): self
     {
-        $this->tel = $tel;
-
-        return $this;
-    }
-
-    public function getApproved(): ?bool
-    {
-        return $this->approved;
-    }
-
-    public function setApproved(?bool $approved): self
-    {
-        $this->approved = $approved;
+        $this->phone = $phone;
 
         return $this;
     }
@@ -264,7 +247,6 @@ class BookingRequest
 
     public function setIsApproved(bool $is_approved): self
     {
-        dump('hui setIsApproved');
         $this->is_approved = $is_approved;
         return $this;
     }

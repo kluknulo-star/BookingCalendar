@@ -5,6 +5,8 @@ Booking Calendar service for booking rooms for various events at the company
 
 composer install --ignore-platform-reqs
 
+**php bin/console doctrine:database:create**
+
 php bin/console doctrine:fixtures:load --append
 
 ## Screenshots

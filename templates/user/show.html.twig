@@ -1,0 +1,61 @@
+{% extends '../base.html.twig' %}
+
+{% block title %}Booking{% endblock %}
+
+{% block body %}
+
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow is-size-2 has-text-dark">
+            Просмотр записи
+        </div>
+    </div>
+
+    <div class="columns is-mobile is-centered">
+        <table class="table is-striped">
+            <tbody>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ booking.title }}</td>
+                </tr>
+                <tr>
+                    <th>Идентификатор</th>
+                    <td>{{ booking.id }}</td>
+                </tr>
+                <tr>
+                    <th>Начало</th>
+                    <td>{{ booking.dateStart ? booking.dateStart|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Конец</th>
+                    <td>{{ booking.dateEnd ? booking.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>ФИО</th>
+                    <td>{{ booking.fio }}</td>
+                </tr>
+                <tr>
+                    <th>Телефон</th>
+                    <td>{{ booking.tel }}</td>
+                </tr>
+                <tr>
+                    <th>Идентификатор помещения</th>
+                    <td>{{ booking.idRoom }}</td>
+                </tr>
+                <tr>
+                    <th>Дата создания</th>
+                    <td>{{ booking.dateCreate ? booking.dateCreate|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Дата изменения</th>
+                    <td>{{ booking.dateUpdate ? booking.dateUpdate|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{#    <a href="{{ path('booking_index') }}">back to list</a>#}
+
+{#    <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>#}
+
+{#    {{ include('_delete_form.html.twig') }}#}
+{% endblock %}

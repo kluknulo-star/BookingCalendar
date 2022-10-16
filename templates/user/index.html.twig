@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/css/calendar.css') }}" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block body %}
+    {% include 'user/utils/sidebar.html.twig' %}
+    <br>
+    <h4 class="has-text-centered has-text-info title is-4">
+        Календарь (user)
+    </h4>
+
+    {% include 'manager/utils/calendar.html.twig' %}
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+
+{% endblock %}

@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 /**
- * @Route("/manager")
+ * @Route("/user")
  */
-class ManagerController extends AbstractController
+class UserController extends AbstractController
 {
     /**
-     * @Route("", name="calendar_manager")
+     * @Route("", name="calendar_user")
      */
     public function index(BookingRequestRepository $calendar): Response
     {
@@ -34,7 +34,7 @@ class ManagerController extends AbstractController
         }
 
         $data = json_encode($rdvs);
-        return $this->render('manager/index.html.twig', compact('data'));
+        return $this->render('user/index.html.twig', compact('data'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="booking_index_admin", methods={"GET"})
+     * @Route("/manager/list", name="booking_index_admin", methods={"GET"})
      */
     public function list(BookingRequestRepository $bookingRepository): Response
     {

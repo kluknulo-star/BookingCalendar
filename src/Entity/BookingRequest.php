@@ -262,8 +262,9 @@ class BookingRequest
         return $this->is_approved;
     }
 
-    public function setIsApproved(?bool $is_approved): self
+    public function setIsApproved(bool $is_approved): self
     {
+        dump('hui setIsApproved');
         $this->is_approved = $is_approved;
         return $this;
     }

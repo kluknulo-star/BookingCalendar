@@ -6,20 +6,23 @@ use App\Entity\BookingRequest;
 use App\Form\BookingType;
 use App\Repository\BookingRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
+
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+/**
+ * @Route("/admin")
+ */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="calendar_admin")
+     * @Route("", name="calendar_admin")
      */
     public function index(BookingRequestRepository $calendar): Response
     {
         $events = $calendar->findAll();
-//        dd($events);
 
         $rdvs=[];
         foreach($events as $event){
@@ -37,11 +40,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="booking_new")
+     * @Route("/new", name="booking_new_admin", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $booking = new BookingRequest();
+        $entityManager = $doctrine->getManager();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
@@ -71,10 +75,20 @@ class AdminController extends AbstractController
     /**
      * @Route("/approve/{id}", name="booking_approve_admin", methods={"GET"})
      */
-    public function approve(BookingRequest $booking): Response
+    public function approve(EntityManagerInterface $entityManager, int $id): Response
     {
+        $booking = $entityManager->getRepository(BookingRequest::class)->find($id);
 
-        $booking->setIsApproved(TRUE);
+        if ($booking)
+        {
+            $booking->setIsApproved(TRUE);
+//            $booking->setFio('Kilyakov Kirill AAAAAAAA');
+
+//            $entityManager->persist($booking);
+            $entityManager->flush();
+        }
+//        dd($booking);
+//        $entityManager->persist($booking);
         dd($booking);
         return $this->redirectToRoute('booking_list_admin');
     }
@@ -112,7 +126,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/list", name="booking_list_admin", methods={"GET"})
+     * @Route("/list", name="booking_list_admin", methods={"GET"})
      */
     public function list(BookingRequestRepository $bookingRepository): Response
     {
@@ -122,7 +136,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/list/archive", name="booking_list_archive_admin", methods={"GET"})
+     * @Route("/list/archive", name="booking_list_archive_admin", methods={"GET"})
      */
     public function listArchive(BookingRequestRepository $bookingRepository): Response
     {

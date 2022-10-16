@@ -1,15 +1,16 @@
-{% extends 'admin.base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}New Booking{% endblock %}
 
 {% block body %}
+        {% include 'admin/utils/sidebar.html.twig' %}
         <div class="columns is-mobile is-centered">
-                <div class="column is-narrow is-size-2 has-text-link-dark">
+                <div class="column is-narrow is-size-2 has-text-info">
                         Заявка
                 </div>
         </div>
 
-        {{ include('admin/_form.html.twig') }}
+        {% include 'admin/utils/_form.html.twig' %}
 
 {#    <a href="{{ path('main') }}">back to list</a>#}
 {% endblock %}

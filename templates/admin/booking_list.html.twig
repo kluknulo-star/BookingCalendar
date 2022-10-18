@@ -22,11 +22,8 @@
     <table class="table is-hoverable is-fullwidth">
         <thead class="is-bordered">
         <tr class="has-background-dark-souls is-bordered">
-{#            <th class="has-text-white">ID</th>#}
             <th class="has-text-white">Название</th>
-{#            <th class="has-text-white">Описание</th>#}
             <th class="has-text-white">Дата</th>
-{#            <th class="has-text-white">Конец</th>#}
             <th class="has-text-white">ФИО</th>
             <th class="has-text-white">Телефон</th>
             <th class="has-text-white">Помещение</th>
@@ -41,8 +38,8 @@
 {#                <td>{{ booking.description }}</td>#}
                 <td>{{ booking.dateStart ? booking.dateStart|date('d-m-Y') : '' }}</td>
 {#                <td>{{ booking.dateEnd ? booking.dateEnd|date('d-m-Y H:i') : '' }}</td>#}
-                <td>{{ booking.fio }}</td>
-                <td>{{ booking.tel }}</td>
+                <td>{{ booking.fullName }}</td>
+                <td>{{ booking.phone }}</td>
                 <td>{{ booking.idRoom }}</td>
 
 {#                <td>{{ booking.approved }}</td>#}

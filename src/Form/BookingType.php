@@ -35,21 +35,21 @@ class BookingType extends AbstractType
                     'class'=>'datetimepicker'
                 ],
             ])
-            ->add('date_end', DateTimeType::class, [
+            ->add('date_finish', DateTimeType::class, [
                 'label'=>'Окончание',
                 'date_widget'=>'single_text',
                 'attr'=>[
                     'class'=>'datetimepicker'
                 ],
             ])
-            ->add('fio', TextType::class, [
+            ->add('full_name', TextType::class, [
                 'label'=>'Фамилия Имя Отчество',
                 'attr'=> [
                     'class'=>'input',
                     'autofocus'=>'autofocus',
                 ],
             ])
-            ->add('tel', TextType::class, [
+            ->add('phone', TextType::class, [
                 'label'=> "Телефон",
                 'attr'=> [
                     'class'=>'input',
@@ -63,11 +63,6 @@ class BookingType extends AbstractType
                     'autofocus'=>'autofocus',
                 ],
             ])
-//            ->add('active')
-//            ->add('date_create')
-//            ->add('date_update')
-//            ->add('id_user_create')
-//            ->add('id_user_update')
         ;
     }
 

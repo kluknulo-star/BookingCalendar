@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isVerified = false;
+    private $isVerified = true;
 
     public function getId(): ?int
     {

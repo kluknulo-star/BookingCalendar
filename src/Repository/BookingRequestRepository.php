@@ -23,7 +23,7 @@ class BookingRequestRepository extends ServiceEntityRepository
     {
 
         $queryBuilder = $this->createQueryBuilder('booking')
-            ->where('booking.approved is NULL')
+            ->where('booking.is_approved is NULL')
             ->orderBy('booking.id');
 
         $query = $queryBuilder->getQuery();
@@ -35,7 +35,7 @@ class BookingRequestRepository extends ServiceEntityRepository
     {
 
         $queryBuilder = $this->createQueryBuilder('booking')
-            ->where('booking.approved is NOT NULL')
+            ->where('booking.is_approved is NOT NULL')
             ->orderBy('booking.id');
 
         $query = $queryBuilder->getQuery();

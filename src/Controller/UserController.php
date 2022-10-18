@@ -27,7 +27,7 @@ class UserController extends AbstractController
             $rdvs[] = [
                 'id' => $event->getId(),
                 'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
+                'end' => $event->getDateFinish()->format('Y-m-d H:i:s'),
                 'title' => $event->getTitle(),
                 'color'=> sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)),
             ];

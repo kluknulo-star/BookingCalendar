@@ -29,7 +29,7 @@ class AdminController extends AbstractController
             $rdvs[] = [
                 'id' => $event->getId(),
                 'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
+                'end' => $event->getDateFinish()->format('Y-m-d H:i:s'),
                 'title' => $event->getTitle(),
                 'color'=> sprintf('#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255)),
             ];
@@ -75,30 +75,25 @@ class AdminController extends AbstractController
     /**
      * @Route("/approve/{id}", name="booking_approve_admin", methods={"GET"})
      */
-    public function approve(EntityManagerInterface $entityManager, int $id): Response
+    public function approve(EntityManagerInterface $entityManager, ?BookingRequest $booking): Response
     {
-        $booking = $entityManager->getRepository(BookingRequest::class)->find($id);
-
-        if ($booking)
-        {
+        if ($booking) {
             $booking->setIsApproved(TRUE);
-//            $booking->setFio('Kilyakov Kirill AAAAAAAA');
-
-//            $entityManager->persist($booking);
             $entityManager->flush();
         }
-//        dd($booking);
-//        $entityManager->persist($booking);
-        dd($booking);
+
         return $this->redirectToRoute('booking_list_admin');
     }
 
     /**
      * @Route("/decline/{id}", name="booking_decline_admin", methods={"GET"})
      */
-    public function decline(BookingRequest $booking): Response
+    public function decline(EntityManagerInterface $entityManager, ?BookingRequest $booking): Response
     {
-        $booking->setIsApproved(false);
+        if ($booking) {
+            $booking->setIsApproved(false);
+            $entityManager->flush();
+        }
 
         return $this->redirectToRoute('booking_list_admin');
     }

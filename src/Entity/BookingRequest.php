@@ -140,7 +140,6 @@ class BookingRequest
     public function setDateFinish(\DateTimeInterface $date_finish): self
     {
         $this->date_finish = $date_finish;
-
         return $this;
     }
 

@@ -41,8 +41,8 @@
 {#                <td>{{ booking.description }}</td>#}
                 <td>{{ booking.dateStart ? booking.dateStart|date('d-m-Y') : '' }}</td>
 {#                <td>{{ booking.dateEnd ? booking.dateEnd|date('d-m-Y H:i') : '' }}</td>#}
-                <td>{{ booking.fio }}</td>
-                <td>{{ booking.tel }}</td>
+                <td>{{ booking.fullName }}</td>
+                <td>{{ booking.phone }}</td>
                 <td>{{ booking.idRoom }}</td>
                 <td>{{ booking.isApproved ? 'одобрено' : 'отклонено'}}</td>
 

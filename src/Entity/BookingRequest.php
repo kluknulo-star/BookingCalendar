@@ -83,6 +83,11 @@ class BookingRequest
      */
     private $is_approved;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $document_filename;
+
 
     public function __construct()
     {
@@ -247,6 +252,18 @@ class BookingRequest
     public function setIsApproved(bool $is_approved): self
     {
         $this->is_approved = $is_approved;
+        return $this;
+    }
+
+    public function getDocumentFilename(): ?string
+    {
+        return $this->document_filename;
+    }
+
+    public function setDocumentFilename(string $document_filename): self
+    {
+        $this->document_filename = $document_filename;
+
         return $this;
     }
 }

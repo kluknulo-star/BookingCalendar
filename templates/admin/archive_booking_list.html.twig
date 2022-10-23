@@ -37,7 +37,9 @@
         {% for booking in bookings %}
             <tr>
 {#                <td>{{ booking.id }}</td>#}
-                <td>{{ booking.title }}</td>
+                <td>
+                    <a href="{{ asset('uploads/documents/' ~ booking.documentFilename) }}">{{ booking.title }}</a>
+                    </td>
 {#                <td>{{ booking.description }}</td>#}
                 <td>{{ booking.dateStart ? booking.dateStart|date('d-m-Y') : '' }}</td>
 {#                <td>{{ booking.dateEnd ? booking.dateEnd|date('d-m-Y H:i') : '' }}</td>#}

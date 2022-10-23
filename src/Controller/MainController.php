@@ -4,7 +4,7 @@ namespace App\Controller;
 
 //use App\Entity\Booking;
 use App\Entity\BookingRequest;
-use App\Form\BookingType;
+use App\Form\BookingFormType;
 //use App\Repository\BookingRepository;
 use App\Repository\BookingRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;

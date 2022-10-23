@@ -3,15 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\BookingRequest;
-use App\Form\BookingType;
+use App\Form\BookingFormType;
 use App\Repository\BookingRequestRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 /**
  * @Route("/admin")
  */
@@ -42,14 +47,21 @@ class AdminController extends AbstractController
     /**
      * @Route("/new", name="booking_new_admin", methods={"GET", "POST"})
      */
-    public function new(Request $request, ManagerRegistry $doctrine): Response
+    public function new(Request $request, ManagerRegistry $doctrine, FileUploader $fileUploader): Response
     {
         $booking = new BookingRequest();
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(BookingFormType::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $documentFile = $form->get('document')->getData();
+            if ($documentFile) {
+                $documentFilename = $fileUploader->upload($documentFile);
+                $booking->setDocumentFilename($documentFilename);
+            }
+
             $entityManager->persist($booking);
             $entityManager->flush();
 
@@ -104,7 +116,7 @@ class AdminController extends AbstractController
      */
     public function edit(Request $request, BookingRequest $booking, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(BookingFormType::class, $booking);
         $booking->setDateUpdate( new \DateTimeImmutable());
         $form->handleRequest($request);
 
@@ -123,10 +135,17 @@ class AdminController extends AbstractController
     /**
      * @Route("/list", name="booking_list_admin", methods={"GET"})
      */
-    public function list(BookingRequestRepository $bookingRepository): Response
+    public function list(BookingRequestRepository $bookingRepository, PaginatorInterface $paginator, Request $request): Response
     {
+
+        $pagination = $paginator->paginate(
+            $bookingRepository->findAllUnseen(),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
         return $this->render('admin/booking_list.html.twig', [
-            'bookings' => $bookingRepository->findAllUnseen(),
+            'pagination' => $pagination,
         ]);
     }
 

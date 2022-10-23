@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\BookingRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,7 +20,7 @@ class BookingRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, BookingRequest::class);
     }
 
-    public function findAllUnseen() : array
+    public function findAllUnseen() : Query
     {
 
         $queryBuilder = $this->createQueryBuilder('booking')
@@ -28,7 +29,8 @@ class BookingRequestRepository extends ServiceEntityRepository
 
         $query = $queryBuilder->getQuery();
 
-        return $query->execute();
+        return $query;
+//        return $query->execute();
     }
 
     public function findAllSeen() : array

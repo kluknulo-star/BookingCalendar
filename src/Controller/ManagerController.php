@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\BookingRequest;
-use App\Form\BookingType;
+use App\Form\BookingFormType;
 use App\Repository\BookingRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +43,7 @@ class ManagerController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $booking = new BookingRequest();
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(BookingFormType::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,7 +75,7 @@ class ManagerController extends AbstractController
      */
     public function edit(Request $request, BookingRequest $booking, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(BookingFormType::class, $booking);
         $booking->setDateUpdate( new \DateTimeImmutable());
         $form->handleRequest($request);
 

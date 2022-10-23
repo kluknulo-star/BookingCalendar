@@ -24,6 +24,7 @@ final class Version20211220165758 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE room_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE booking_request (id INT NOT NULL, title VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, date_start TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, date_finish TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, full_name VARCHAR(255) DEFAULT NULL, phone VARCHAR(14) DEFAULT NULL, id_room INT DEFAULT NULL, active BOOLEAN DEFAULT NULL, date_create TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, date_update TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, id_user_create INT DEFAULT NULL, id_user_update INT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE booking_request ADD is_approved BOOLEAN DEFAULT NULL');
+        $this->addSql('ALTER TABLE booking_request ADD document_filename VARCHAR(255) NOT NULL');
         $this->addSql('CREATE TABLE room (id INT NOT NULL, type VARCHAR(25) NOT NULL, description VARCHAR(255) DEFAULT NULL, active BOOLEAN NOT NULL, date_create TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, date_update TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, id_user_create INT NOT NULL, id_user_update INT DEFAULT NULL, PRIMARY KEY(id))');
     }
 

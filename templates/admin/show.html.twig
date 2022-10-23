@@ -45,7 +45,9 @@
                 </tr>
                 <tr>
                     <th>Документ</th>
-                    <td>ссылка</td>
+                    <td>
+                        <a href="{{ asset('uploads/documents/' ~ booking.documentFilename) }}">{{ booking.documentFilename }}</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

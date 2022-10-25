@@ -65,7 +65,8 @@ class AdminController extends AbstractController
             $entityManager->persist($booking);
             $entityManager->flush();
 
-            return $this->redirectToRoute('calendar_index', [], Response::HTTP_SEE_OTHER);
+            $messageAlert = 'My success messages';
+            return $this->redirectToRoute('calendar_index', ['alert' => $messageAlert], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/new.html.twig', [
@@ -141,7 +142,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $bookingRepository->findAllUnseen(),
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            12 /*limit per page*/
         );
 
         return $this->render('admin/booking_list.html.twig', [

@@ -14,11 +14,10 @@
     </style>
 
     <div class="columns is-mobile is-centered">
-        <div class="column is-narrow is-size-2">
+        <div class="column is-narrow is-size-3">
             Текущие заявки ({{ pagination.getTotalItemCount }})
         </div>
     </div>
-
     <table class="table is-hoverable is-fullwidth">
         <thead class="is-bordered">
         <tr class="has-background-dark-souls is-bordered">
@@ -40,16 +39,27 @@
                 <td>{{ booking.phone }}</td>
                 <td>{{ booking.idRoom }}</td>
 
-                <td>
-                    <a href="{{ path('booking_show_admin', {'id': booking.id}) }}"
-                       class="button is-small is-dark is-outlined">
-                        Рассмотреть
-                    </a>
+                <td class="is-vcentered has-text-right">
+                    <div class="dropdown is-right has-text-left">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu{{ booking.id }}">
+                              <span class="icon is-small">
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu{{ booking.id }}" role="menu">
+                            <div class="dropdown-content">
+                                <a class="dropdown-item"
+                                   href="{{ path('booking_show_admin', {'id': booking.id}) }}">Рассмотреть</a>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Нет активных заявок</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -61,4 +71,9 @@
             </nav>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('styles/js/dropdown.js') }}"></script>
+
 {% endblock %}

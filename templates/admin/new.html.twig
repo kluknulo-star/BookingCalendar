@@ -3,62 +3,18 @@
 {% block title %}New Booking{% endblock %}
 
 {% block body %}
-        {% include 'admin/utils/sidebar.html.twig' %}
+    {% include 'admin/utils/sidebar.html.twig' %}
 
-        <div class="columns is-mobile is-centered">
-                <div class="column is-narrow is-size-2 has-text-info">
-                        Заявка
-                </div>
-        </div>
+<div class="columns is-mobile is-centered">
+    <div class="column is-narrow is-size-2 has-text-info">
+        Заявка
+    </div>
+</div>
 
-        {% include 'admin/utils/_form.html.twig' %}
+{% include 'admin/utils/_form.html.twig' %}
 
 {% endblock %}
 
 {% block javascripts %}
-{#        <script type="text/javascript">#}
-{#                // Initialize all input of type date#}
-{#                // var calendars = new bulmaCalendar('.bulmaCalendar', {#}
-{#                //         dateFormat: 'dd.MM.yyyy' // 01.01.2021#}
-{#                // // });#}
-{#                var dateNow = new Date();#}
-{#                var dateAfterTwoMounth = new Date(Date.now() + 2592000000*2);#}
 
-{#                console.log(`${dateNow.getMonth()}/${dateNow.getDate()}/${dateNow.getFullYear()}`);#}
-
-{#                // console.log(`${dateAfterMounth}`);\#}
-
-{#                var calendars = bulmaCalendar.attach('.date-bulma', {#}
-{#                        type: 'datetime',#}
-{#                        startDate: new Date(),#}
-{#                        endDate: new Date(),#}
-{#                        onValidate: null,#}
-{#                        allowSameDayRange: true,#}
-{#                        timeFormat: 'HH:mm',#}
-{#                        lang: 'ru',#}
-{#                        weekStart: 1,#}
-{#                        minDate: dateNow,#}
-{#                        maxDate: dateAfterTwoMounth,#}
-{#                        disabledWeekDays: '6,0',#}
-{#                        // enableYearSwitch: false,#}
-{#                        displayYearsCount: 4,#}
-{#                });#}
-
-{#                // Loop on each calendar initialized#}
-{#                for(var i = 0; i < calendars.length; i++) {#}
-{#                        // Add listener to date:selected event#}
-{#                        calendars[i].on('select', date => {#}
-{#                                console.log(date);#}
-{#                        });#}
-{#                }#}
-
-{#                // To access to bulmaCalendar instance of an element#}
-{#                var element = document.querySelector('#calendars');#}
-{#                if (element) {#}
-{#                        // bulmaCalendar instance is available as element.bulmaCalendar#}
-{#                        element.bulmaCalendar.on('select', function(datepicker) {#}
-{#                                console.log(datepicker.data.value());#}
-{#                        });#}
-{#                }#}
-{#        </script>#}
 {% endblock %}

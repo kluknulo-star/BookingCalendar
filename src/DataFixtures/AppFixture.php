@@ -34,7 +34,7 @@ class AppFixture extends Fixture
             $booking->setPhone($faker->e164PhoneNumber);
             $booking->setIdRoom(rand(1, 3));
             $booking->setIdUserCreate(0);
-            $booking->setDocumentFilename("$faker->text.txt");
+            $booking->setDocumentFilename("example.pdf");
 
             $manager->persist($booking);
         }

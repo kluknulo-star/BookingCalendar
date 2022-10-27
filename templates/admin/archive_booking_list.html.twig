@@ -5,7 +5,6 @@
 {% block body %}
 
     {% include 'admin/utils/sidebar.html.twig' %}
-{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">#}
 
     <style type="text/css">
         .has-background-dark-souls {
@@ -34,7 +33,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for booking in bookings %}
+        {% for booking in pagination %}
             <tr>
 {#                <td>{{ booking.id }}</td>#}
                 <td>
@@ -48,24 +47,6 @@
                 <td>{{ booking.idRoom }}</td>
                 <td>{{ booking.isApproved ? 'одобрено' : 'отклонено'}}</td>
 
-{#                <td>{{ booking.approved }}</td>#}
-
-{#                <td>#}
-{#                    <a href="{{ path('booking_show', {'id': booking.id}) }}" class="button is-small is-info is-outlined">#}
-{#                        show#}
-{#                    </a>#}
-{#                    <a href="{{ path('booking_edit', {'id': booking.id}) }}" class="button is-small is-danger is-outlined">#}
-{#                        edit#}
-{#                    </a>#}
-{#                    <button class="" action="">#}
-{#                        show#}
-{#                    </button>#}
-{#                </td>#}
-{#                <td>#}
-{#                    <a href="{{ path('booking_show_admin', {'id': booking.id}) }}" class="button is-small is-dark is-outlined">#}
-{#                        Рассмотреть#}
-{#                    </a>#}
-{#                </td>#}
             </tr>
         {% else %}
             <tr>
@@ -74,15 +55,12 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow is-size-2">
+            <nav class="pagination" role="navigation" aria-label="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </nav>
+        </div>
+    </div>
 
-{#    <button class="button">#}
-{#        <a href="{{ path('booking_new') }}">#}
-{#            Create new#}
-{#        </a>#}
-{#    </button>#}
-{#    <button class="button">#}
-{#        <a href="{{ path('main_page') }}">#}
-{#            Calendar#}
-{#        </a>#}
-{#    </button>#}
 {% endblock %}

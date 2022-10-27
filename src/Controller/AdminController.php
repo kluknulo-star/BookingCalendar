@@ -55,16 +55,18 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $documentFile = $form->get('document')->getData();
             if ($documentFile) {
                 $documentFilename = $fileUploader->upload($documentFile);
                 $booking->setDocumentFilename($documentFilename);
             }
-
             $entityManager->persist($booking);
             $entityManager->flush();
 
+            $this->addFlash(
+                'has-background-info',
+                'Запись успешно отправлена'
+            );
             $messageAlert = 'My success messages';
             return $this->redirectToRoute('calendar_index', ['alert' => $messageAlert], Response::HTTP_SEE_OTHER);
         }
@@ -93,6 +95,10 @@ class AdminController extends AbstractController
         if ($booking) {
             $booking->setIsApproved(TRUE);
             $entityManager->flush();
+            $this->addFlash(
+                'has-background-info',
+                'Запись одобрена'
+            );
         }
 
         return $this->redirectToRoute('booking_list_admin');
@@ -106,6 +112,10 @@ class AdminController extends AbstractController
         if ($booking) {
             $booking->setIsApproved(false);
             $entityManager->flush();
+            $this->addFlash(
+                'has-background-info',
+                'Запись отклонена'
+            );
         }
 
         return $this->redirectToRoute('booking_list_admin');
@@ -153,10 +163,17 @@ class AdminController extends AbstractController
     /**
      * @Route("/list/archive", name="booking_list_archive_admin", methods={"GET"})
      */
-    public function listArchive(BookingRequestRepository $bookingRepository): Response
+    public function listArchive(BookingRequestRepository $bookingRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $pagination = $paginator->paginate(
+            $bookingRepository->findAllSeen(),
+            $request->query->getInt('page', 1), /*page number*/
+            15 /*limit per page*/
+        );
+
+
         return $this->render('admin/archive_booking_list.html.twig', [
-            'bookings' => $bookingRepository->findAllSeen(),
+            'pagination' => $pagination,
         ]);
     }
 

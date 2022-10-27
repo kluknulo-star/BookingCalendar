@@ -4,112 +4,63 @@
 
 {% block body %}
     {% include 'main/utils/sidebar.html.twig' %}
-    <br>
-    <div class="columns">
-        <div class="column is-3">
-            {% if error %}
-                <div class="notification is-danger is-light">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                    <button class="delete"></button>
+
+    {% if error %}
+    <div class="flash is-hidden" data-flash-type="has-background-dark">
+        Вы неверно ввели данные
+{#        {{ error.messageKey|trans(error.messageData, 'security') }}#}
+    </div>
+    {% endif %}
+
+
+<br>
+<div class="columns">
+    <div class="column is-3">
+
+        <form method="post">
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
 
-            <form method="post">
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
-
-                <h2 class="title">Вход</h2>
-                <label for="inputEmail" class="label">Логин</label>
-                <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input"
-                               autocomplete="email" required autofocus>
-                        <span class="icon is-small is-left">
+            <h2 class="title">Вход</h2>
+            <label for="inputEmail" class="label">Логин</label>
+            <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input"
+                           autocomplete="email" required autofocus>
+                    <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i></span>
-                    </p>
-                </div>
-                <label for="inputPassword" class="label">Пароль</label>
+                </p>
+            </div>
+            <label for="inputPassword" class="label">Пароль</label>
 
-                <div class="field">
+            <div class="field">
 
-                    <p class="control has-icons-left">
-                        <input type="password" name="password" id="inputPassword" class="input"
-                               autocomplete="current-password" required>
-                        <span class="icon is-small is-left">
+                <p class="control has-icons-left">
+                    <input type="password" name="password" id="inputPassword" class="input"
+                           autocomplete="current-password" required>
+                    <span class="icon is-small is-left">
                                             <i class="fas fa-lock"></i>
                                         </span>
-                    </p>
-                </div>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-info" type="submit">
-                            Войти
-                        </button>
-                    </p>
-                </div>
-            </form>
-        </div>
-
-
-        {#        <form method="post"> #}
-
-
-        {#            {% if error %} #}
-        {#                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
-        {#            {% endif %} #}
-
-        {#            {% if app.user %} #}
-        {#                <div class="mb-3"> #}
-        {#                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a> #}
-        {#                </div> #}
-        {#            {% endif %} #}
-
-        {#            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> #}
-        {#            <label for="inputEmail">Email</label> #}
-        {#            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" #}
-        {#                   autocomplete="email" required autofocus> #}
-        {#            <label for="inputPassword">Password</label> #}
-        {#            <input type="password" name="password" id="inputPassword" class="form-control" #}
-        {#                   autocomplete="current-password" required> #}
-
-        {#            <input type="hidden" name="_csrf_token" #}
-        {#                   value="{{ csrf_token('authenticate') }}" #}
-        {#            > #}
-
-        {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-        #}
-
-        {#            <button class="button btn-lg btn-primary" type="submit"> #}
-        {#                Sign in #}
-        {#            </button> #}
-        {#        </form> #}
+                </p>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <div class="field">
+                <p class="control">
+                    <button class="button is-info" type="submit">
+                        Войти
+                    </button>
+                </p>
+            </div>
+        </form>
     </div>
+</div>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-                const $notification = $delete.parentNode;
 
-                $delete.addEventListener('click', () => {
-                    $notification.parentNode.removeChild($notification);
-                });
-            });
-        });
-    </script>
 {% endblock %}
 

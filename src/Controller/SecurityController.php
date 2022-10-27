@@ -40,9 +40,12 @@ class SecurityController extends AbstractController
      */
     public function logout(): RedirectResponse
     {
-        return $this->redirect('http://symfony.com/doc');
+        $this->addFlash(
+            'has-background-info',
+            'Запись отклонена'
+        );
+//        HOW TODO IT?
         return $this->redirectToRoute('app_login');
-
 //        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru-RU">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Booking Calendar{% endblock %}</title>
 
     <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+
     <link rel="stylesheet" href="{{ asset('styles/css/bulma.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/css/utils.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/css/toastify.css') }}">
     <link rel="icon" href="https://i.pinimg.com/736x/9c/ed/98/9ced98a5437a7bed4b5575e1b4e732ab.jpg">
+
+    {% block stylesheets %}
+
+    {% endblock %}
     <style>
         @import url(http://fonts.googleapis.com/css?family=Roboto:wght@300;400;500;700&amp;subset=latin,cyrillic);
         html, body, html * {
             font-family: 'Roboto', sans-serif;
         }
     </style>
-    {% block stylesheets %}
 
-    {% endblock %}
+    <script type="text/javascript" src="{{ asset('styles/js/toastify.js') }}"></script>
+
 </head>
 <body>
 
-
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash is-hidden" data-flash-type="{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 
 
 <div class="container">
@@ -29,5 +42,7 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript" src="{{ asset('styles/js/notification.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </html>
